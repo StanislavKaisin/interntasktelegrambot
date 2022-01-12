@@ -1,12 +1,12 @@
 require('dotenv').config();
 
 const type = 'postgres';
-const host = 'ec2-52-71-231-37.compute-1.amazonaws.com';
+const host = 'ec2-54-220-166-184.eu-west-1.compute.amazonaws.com';
 const port = Number(5432);
-const username = 'llfaqdyltyciaj';
+const username = 'rguwsfiigvqpkx';
 const password =
-  '36b4e75b46766d10e1ec3ed62f0419458dbfcbc125cfe0f3827eed91f6282ee2';
-const database = 'ddq333gtf148kt';
+  'fabcf8f4293331d668a62228764886e9fa94fabe6928f4c99c00d497188f403a';
+const database = 'dd75tmti3i0ego';
 
 export const config = {
   TYPE: process.env.TYPE || type,

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { BotModule } from 'src/BotModule/bot.module';
 import { BotEntity } from 'src/BotModule/entities/bot.entity';
 import { config } from 'src/Config/config';
 import { AppController } from './app.controller';
@@ -20,6 +21,7 @@ import { AppService } from './app.service';
       entities: [BotEntity],
       synchronize: true,
     }),
+    BotModule,
   ],
   controllers: [AppController],
   providers: [AppService],
