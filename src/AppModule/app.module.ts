@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BotModule } from 'src/BotModule/bot.module';
 import { BotEntity } from 'src/BotModule/entities/bot.entity';
+import { CatchModule } from 'src/CatchModule/catch.module';
 import { config } from 'src/Config/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -22,6 +23,7 @@ import { AppService } from './app.service';
       synchronize: true,
     }),
     BotModule,
+    CatchModule,
   ],
   controllers: [AppController],
   providers: [AppService],

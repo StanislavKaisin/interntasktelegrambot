@@ -2,40 +2,33 @@ import {
   Controller,
   Post,
   Body,
-  Patch,
   Param,
   UsePipes,
   BadRequestException,
-  ValidationPipe,
   ParseIntPipe,
   Delete,
   HttpStatus,
   Get,
-  // HttpStatus,
 } from '@nestjs/common';
+import { CatchService } from 'src/CatchModule/catch.service';
 import { JoiValidationPipe } from 'src/Middleware/joi-validation.middleware';
 import { BotService } from './bot.service';
 import { CreateBotDto } from './dto/create-bot.dto';
 import { createBotSchema } from './validation/bot.validation';
-// import { UsersService } from './users.service';
-// import { CreateUserDto } from './dto/create-user.dto';
-// import { UpdateUserDto } from './dto/update-user.dto';
-// import { JoiValidationPipe } from 'src/middleware/joi-validation.middleware';
-// import { createUserSchema } from 'src/middleware/createUserSchema';
-// import { hashPassword } from 'src/utils/encryption';
-// import { updateUserSchema } from 'src/middleware/updateUserSchema';
-
-// const MongoErrorDuplicateKeyErrorCode = 11000;
 
 @Controller('bots')
 export class BotController {
-  constructor(private readonly botService: BotService) {}
+  constructor(
+    private readonly botService: BotService,
+    private readonly catchService: CatchService,
+  ) {}
 
   @Post()
   @UsePipes(new JoiValidationPipe(createBotSchema))
   async create(@Body() createBotDto: CreateBotDto) {
     try {
       const result = await this.botService.create(createBotDto);
+      await this.catchService.startBotSpying(result.bot_token);
       return result;
     } catch (error) {
       throw new BadRequestException(error.message);
